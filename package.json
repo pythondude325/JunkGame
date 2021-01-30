@@ -23,9 +23,5 @@
     "presets": [
       "@babel/preset-env"
     ]
-  },
-  "browserlist": [
-    "last 1 firefox version",
-    "last 1 chrome version"
-  ]
+  }
 }

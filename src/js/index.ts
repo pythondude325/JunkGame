@@ -2,16 +2,17 @@ import "babel-polyfill";
 import * as THREE from "three";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import desk_glb from "../assets/desk.glb";
+import { IUpdater } from "./update";
 import { Controls } from "./controls";
 
-class GameRender {
+class GameRender implements IUpdater {
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
     canvas: HTMLCanvasElement;
     renderer: THREE.WebGLRenderer;
     
     ambientLight: THREE.AmbientLight;
-    directionalLight: THREE.DirectionalLight;
+    directionalLight: THREE.HemisphereLight;
 
     constructor(){
         this.scene = new THREE.Scene();
@@ -20,7 +21,7 @@ class GameRender {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.camera.position.z = 5;
         this.camera.position.x = 1;
-        this.camera.position.y = 2;
+        this.camera.position.y = 1.6;
 
         this.canvas = <HTMLCanvasElement> document.getElementById("renderCanvas");
 
@@ -41,14 +42,13 @@ class GameRender {
         this.ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(this.ambientLight);
 
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 10);
-        this.directionalLight.position.z = 0.2;
-        this.directionalLight.position.x = 0.2;
+        this.directionalLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 5);
+        // this.directionalLight.position.z = 0.2;
+        // this.directionalLight.position.x = 0.2;
         this.scene.add(this.directionalLight);
     }
 
-    render_loop(): void {
-        requestAnimationFrame(this.render_loop.bind(this));
+    update(timestamp: number): void {
         this.renderer.render(this.scene, this.camera);
     }
 }
@@ -66,11 +66,14 @@ class Game {
     constructor(){
         this.renderer = new GameRender();
         this.gltf_loader = new GLTFLoader();
-        this.controls = new Controls(this.renderer.camera);
+        this.controls = new Controls(this.renderer.camera, document.body);
     }
 
-    render_loop(): void {
-        this.renderer.render_loop();
+    render_loop(timestamp: number): void {
+        window.requestAnimationFrame(this.render_loop.bind(this));
+
+        this.controls.update(timestamp);
+        this.renderer.update(timestamp);
     }
 
     async load_gltf(file_url: string): Promise<GLTF> {
@@ -78,11 +81,13 @@ class Game {
     }
 
     async load_data(): Promise<void> {
-        const junk_data = await this.load_gltf(desk_glb);
+        const data = await this.load_gltf(desk_glb);
+        this.renderer.scene.add(data.scene);
+
         this.object_models = {};
-        for(var child of junk_data.scene.children){
+        for(var child of data.scene.children){
+            console.log({child});
             this.object_models[child.name] = child;
-            this.renderer.scene.add(child);
         }
     }
 }
@@ -91,5 +96,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     const game = new Game();
     await game.load_data();
     Object.assign(window, {game});
-    game.render_loop();
+    window.requestAnimationFrame(game.render_loop.bind(game));
 });
