@@ -6,6 +6,7 @@
   "repository": "git@github.com:pythondude325/JunkGame.git",
   "author": "pythondude325 <me@gisch.dev>",
   "dependencies": {
+    "g": "^2.0.1",
     "three": "^0.125.2"
   },
   "scripts": {
