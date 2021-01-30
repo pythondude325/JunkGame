@@ -12,7 +12,7 @@ class GameRender implements IUpdater {
     renderer: THREE.WebGLRenderer;
     
     ambientLight: THREE.AmbientLight;
-    directionalLight: THREE.DirectionalLight;
+    directionalLight: THREE.HemisphereLight;
 
     constructor(){
         this.scene = new THREE.Scene();
@@ -21,7 +21,7 @@ class GameRender implements IUpdater {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.camera.position.z = 5;
         this.camera.position.x = 1;
-        this.camera.position.y = 2;
+        this.camera.position.y = 1.6;
 
         this.canvas = <HTMLCanvasElement> document.getElementById("renderCanvas");
 
@@ -42,9 +42,9 @@ class GameRender implements IUpdater {
         this.ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(this.ambientLight);
 
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 10);
-        this.directionalLight.position.z = 0.2;
-        this.directionalLight.position.x = 0.2;
+        this.directionalLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 5);
+        // this.directionalLight.position.z = 0.2;
+        // this.directionalLight.position.x = 0.2;
         this.scene.add(this.directionalLight);
     }
 
@@ -81,11 +81,13 @@ class Game {
     }
 
     async load_data(): Promise<void> {
-        const junk_data = await this.load_gltf(desk_glb);
+        const data = await this.load_gltf(desk_glb);
+        this.renderer.scene.add(data.scene);
+
         this.object_models = {};
-        for(var child of junk_data.scene.children){
+        for(var child of data.scene.children){
+            console.log({child});
             this.object_models[child.name] = child;
-            this.renderer.scene.add(child);
         }
     }
 }
