@@ -1,7 +1,7 @@
 import "babel-polyfill";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import junk_pipe from "./assets/junk-pipe.glb";
+import junk_pipe from "../assets/junk-pipe.glb";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const scene = new THREE.Scene();
