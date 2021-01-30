@@ -79,6 +79,10 @@ export class Controls implements IUpdater {
             return;
         }
 
+        if(!this.pointer_controls.isLocked){
+            return;
+        }
+
         let delta = (now - this.last_updated) / 1000;
         this.last_updated = now;
 
