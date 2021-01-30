@@ -6,6 +6,7 @@
   "repository": "git@github.com:pythondude325/JunkGame.git",
   "author": "pythondude325 <me@gisch.dev>",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "g": "^2.0.1",
     "three": "^0.125.2"
   },
@@ -14,6 +15,16 @@
     "build": "parcel build src/index.html"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
     "parcel-bundler": "^1.12.4"
-  }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "browserlist": [
+    "last 1 firefox version",
+    "last 1 chrome version"
+  ]
 }
