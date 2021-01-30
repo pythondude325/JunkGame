@@ -43,7 +43,7 @@ class GameRender {
         this.ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(this.ambientLight);
 
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 10);
         this.directionalLight.position.z = 0.2;
         this.directionalLight.position.x = 0.2;
         this.scene.add(this.directionalLight);
@@ -53,7 +53,6 @@ class GameRender {
         this.renderer.render(this.scene, this.camera);
     }
 }
-
 
 class Game {
     renderer: GameRender;
