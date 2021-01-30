@@ -2,9 +2,10 @@ import "babel-polyfill";
 import * as THREE from "three";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import desk_glb from "../assets/desk.glb";
+import { IUpdater } from "./update";
 import { Controls } from "./controls";
 
-class GameRender {
+class GameRender implements IUpdater {
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
     canvas: HTMLCanvasElement;
@@ -47,8 +48,7 @@ class GameRender {
         this.scene.add(this.directionalLight);
     }
 
-    render_loop(): void {
-        requestAnimationFrame(this.render_loop.bind(this));
+    update(timestamp: number): void {
         this.renderer.render(this.scene, this.camera);
     }
 }
@@ -66,11 +66,14 @@ class Game {
     constructor(){
         this.renderer = new GameRender();
         this.gltf_loader = new GLTFLoader();
-        this.controls = new Controls(this.renderer.camera);
+        this.controls = new Controls(this.renderer.camera, document.body);
     }
 
-    render_loop(): void {
-        this.renderer.render_loop();
+    render_loop(timestamp: number): void {
+        window.requestAnimationFrame(this.render_loop.bind(this));
+
+        this.controls.update(timestamp);
+        this.renderer.update(timestamp);
     }
 
     async load_gltf(file_url: string): Promise<GLTF> {
@@ -91,5 +94,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     const game = new Game();
     await game.load_data();
     Object.assign(window, {game});
-    game.render_loop();
+    window.requestAnimationFrame(game.render_loop.bind(game));
 });
