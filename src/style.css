@@ -1,1 +1,2 @@
 body { margin: 0; }
+#renderCanvas { height: 100%; width: 100%; }
