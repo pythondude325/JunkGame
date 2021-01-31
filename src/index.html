@@ -14,15 +14,21 @@
                 <img src="/assets/img/playbutton.png" alt="">
             </div>
         </div>
-        
-    <audio controls="" autoplay="true" id="audioplayer" src="\assets\sounds\ambiance.mp3">
-        <div style="border: 1px solid black ; padding: 8px;">
-            Sorry, your browser does not support the &lt;audio&gt; tag used in this demo.
-        </div>
-    </audio>
+
+        <audio controls="" autoplay="true" class="audioplayer" src="\assets\sounds\JunkSong2.mp3">
+            <div style="border: 1px solid black ; padding: 8px;">
+                Sorry, your browser does not support the &lt;audio&gt; tag used in this demo.
+            </div>
+        </audio>
 
     </div>
     <div id="gameUI">
+
+        <audio controls="" autoplay="true"  class="audioplayer" src="\assets\sounds\ambiance.mp3">
+            <div style="border: 1px solid black ; padding: 8px;">
+                Sorry, your browser does not support the &lt;audio&gt; tag used in this demo.
+            </div>
+        </audio>
         <div class="container">
             <div id="objectpopup">
                 <div>Press Space to Pick up item:</div>
@@ -33,12 +39,12 @@
             <div id="crosshair"></div>
 
             <div id="ordertext">
-               <div id="scorefull"><span id="scorecurrent">0</span> /5</div>
+                <div id="scorefull"><span id="scorecurrent">0</span> /10</div>
                 <h2>Order Request:</h2>
-                <div>“Oh, hey, you’re the guy I talk to about getting valuable things, right? Just going to assume that you are. Anyways, I’m looking for A LOT of [common junk]. It should be out there somewhere, and I’d appreciate getting my hands on 5 things.”</div>
+                <div>“Oh, hey, you’re the guy I talk to about getting valuable things, right? Just going to assume that you are. Anyways, I’m looking for A LOT of [common junk]. It should be out there somewhere, have a look around. I’d appreciate getting my hands on 10 things... for reasons...”</div>
             </div>
             <div id="inventorybox">
-               
+
                 <h2>Inventory:</h2>
                 <div class="invslot" id="inv1">Empty Slot</div>
                 <div class="invslot" id="inv2">Empty Slot</div>
@@ -49,7 +55,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="credits"></div>
     <canvas id="renderCanvas"></canvas>
 </body>

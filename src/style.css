@@ -54,13 +54,18 @@ body {
     height: auto;
 }
 
-#blocker #audioplayer {
+#blocker .audioplayer {
     position: absolute;
     top: 0;
     opacity: .05;
 }
-#blocker #audioplayer:hover {
+#blocker .audioplayer:hover {
     opacity: 1;
+}
+#gameUI .audioplayer {
+    position: absolute;
+    top: 0;
+    display: none;
 }
 
 #gameUI {
@@ -188,7 +193,6 @@ body {
     
     min-height: 100%;
     min-width: 100%;
-    position: relative;
     text-align: center;
     z-index: 50;
     display: none;
