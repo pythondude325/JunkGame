@@ -48,8 +48,12 @@ export class GameState {
 
     inv_slot_els: HTMLElement[];
     inventory: (JunkItem | null)[] = [null, null, null, null, null];
+
+    score_display_el: HTMLElement;
+    score: number = 0;
+    unlock: () => void;
     
-    constructor(gltf_loader: (file_url: string) => Promise<GLTF>, scene: THREE.Scene, camera: THREE.Camera){
+    constructor(gltf_loader: (file_url: string) => Promise<GLTF>, scene: THREE.Scene, camera: THREE.Camera, unlock: () => void){
         this.junk = [];
         this.junk_objects = {};
         this.gltf_loader = gltf_loader;
@@ -65,6 +69,9 @@ export class GameState {
 
         document.body.addEventListener("keydown", this.on_key_down_listener.bind(this));
 
+        this.score_display_el = document.getElementById("scorecurrent");
+
+        this.unlock = unlock;
     }
 
     async load_models(){
@@ -122,11 +129,25 @@ export class GameState {
     drop_item(slot: number){
         if(this.inventory[slot] != null){
             const my_item = this.inventory[slot];
-            my_item.object.position.x = this.camera.position.x;
-            my_item.object.position.z = this.camera.position.z;
-            my_item.object.position.y = 0;
             this.inv_slot_els[slot].innerText = "Empty Slot";
             this.inventory[slot] = null;
+
+            if (-2 <= this.camera.position.z && this.camera.position.z <= -1 &&
+                0 <= this.camera.position.x && this.camera.position.x <= 1){
+                
+                this.score++;
+                this.score_display_el.innerText = this.score.toString();
+
+                if(this.score >= 10){
+                    document.getElementById("credits").style.display = "block";
+                    this.unlock();
+                }
+
+            } else {
+                my_item.object.position.x = this.camera.position.x;
+                my_item.object.position.z = this.camera.position.z;
+                my_item.object.position.y = 0;    
+            }
         }
     }
 
@@ -136,7 +157,6 @@ export class GameState {
 
     update(timestamp: number){
         const junk_objects = this.get_junk_object_array();
-        // console.log(junk_objects);
         
         this.raycaster.setFromCamera(zero_vector, this.camera);
         
@@ -153,8 +173,6 @@ export class GameState {
                 this.seen_object = object;
                 this.object_popup_el.style.display = "";
 
-                console.log(object.name);
-
                 const hovered_object_data = junk_data.junk_data.find(({model_name}) => model_name == object.name);
                 this.object_name_el.innerText = hovered_object_data.name;
                 this.object_desc_el.innerText = hovered_object_data.desc;
@@ -165,6 +183,5 @@ export class GameState {
                 this.object_popup_el.style.display = "none";
             }
         }
-        console.log(this.seen_object);
     }
 }

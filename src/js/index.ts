@@ -69,7 +69,7 @@ class Game {
         this.renderer = new GameRender();
         this.gltf_loader = new GLTFLoader();
         this.controls = new Controls(this.renderer.camera, document.body);
-        this.game_state = new GameState(this.load_gltf.bind(this), this.renderer.scene, this.renderer.camera);
+        this.game_state = new GameState(this.load_gltf.bind(this), this.renderer.scene, this.renderer.camera, this.controls.pointer_controls.unlock.bind(this.controls.pointer_controls));
     }
 
     render_loop(timestamp: number): void {
