@@ -97,6 +97,18 @@ export class Controls implements IUpdater {
         direction.x = Number(this.move_right) - Number(this.move_left);
         direction.normalize();
 
+        // let current_pos = this.camera.position.clone();
+        // let new_direction = direction.clone();
+        // new_direction.multiplyScalar(this.move_speed * delta);
+        // new_direction.applyAxisAngle(new THREE.Vector3(0, 1, 0), this.camera.rotation.y);
+        // let new_pos = current_pos.clone()
+        // new_pos.add(new_direction);
+
+        // // check if the new calculated positoin is in bounds
+        // if((0.5 < new_pos.x && new_pos.x < 49.5) && (-24.5 < new_pos.z && new_pos.z < 24.5)){  
+        //     this.camera.position.copy(new_pos);
+        // }
+
         this.pointer_controls.moveForward(direction.z * this.move_speed * delta);
         this.pointer_controls.moveRight(direction.x * this.move_speed * delta);
     }
