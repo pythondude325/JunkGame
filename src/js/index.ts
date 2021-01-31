@@ -4,6 +4,7 @@ import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import desk_glb from "../assets/desk.glb";
 import { IUpdater } from "./update";
 import { Controls } from "./controls";
+import { Maze } from "./maze";
 
 class GameRender implements IUpdater {
     scene: THREE.Scene;
