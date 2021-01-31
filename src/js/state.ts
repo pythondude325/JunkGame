@@ -35,8 +35,6 @@ const zero_vector = new Vector2();
 export class GameState {
     junk: JunkItem[];
 
-    inventory: [];
-
     junk_objects: Record<string, THREE.Object3D>;
     gltf_loader: (file_url: string) => Promise<GLTF>;
     scene: THREE.Scene;
@@ -44,9 +42,12 @@ export class GameState {
     camera: THREE.Camera;
 
     seen_object: THREE.Object3D | null = null;
-    object_popup: HTMLElement;
+    object_popup_el: HTMLElement;
     object_name_el: HTMLElement;
     object_desc_el: HTMLElement;
+
+    inv_slot_els: HTMLElement[];
+    inventory: (JunkItem | null)[] = [null, null, null, null, null];
     
     constructor(gltf_loader: (file_url: string) => Promise<GLTF>, scene: THREE.Scene, camera: THREE.Camera){
         this.junk = [];
@@ -56,10 +57,14 @@ export class GameState {
         this.raycaster = new THREE.Raycaster();
         this.camera = camera;
 
-        this.object_popup = document.getElementById("objectpopup");
-        this.object_popup.style.display = "none";
+        this.object_popup_el = document.getElementById("objectpopup");
+        this.object_popup_el.style.display = "none";
         this.object_name_el = document.getElementById("hoverobjname");
         this.object_desc_el = document.getElementById("hoverobjdesc");
+        this.inv_slot_els = Array.from(Array(5).keys()).map(n => document.getElementById(`inv${n+1}`));
+
+        document.body.addEventListener("keydown", this.on_key_down_listener.bind(this));
+
     }
 
     async load_models(){
@@ -77,6 +82,51 @@ export class GameState {
             const my_junk_item = new JunkItem(junk_name, this.junk_objects);
             this.junk.push(my_junk_item);
             this.scene.add(my_junk_item.object);
+        }
+    }
+
+    on_key_down_listener(ev: KeyboardEvent){
+        switch(ev.code){
+            case "Space":
+                if(this.seen_object != null){
+                    const my_slot = this.inventory.findIndex((slot) => slot == null);
+                    if(my_slot == -1){
+                        return;
+                    }
+                    
+                    const my_item = this.junk.find((item) => item.uuid == this.seen_object.uuid);
+                    this.inventory[my_slot] = my_item
+                    my_item.object.position.y = -10;
+
+                    this.inv_slot_els[my_slot].innerText = junk_data.junk_data.find(({model_name}) => model_name == my_item.name).name;
+                }
+                break;
+            case "Digit1":
+                this.drop_item(0);
+                break;
+            case "Digit2":
+                this.drop_item(1);
+                break;
+            case "Digit3":
+                this.drop_item(2);
+                break;
+            case "Digit4":
+                this.drop_item(3);
+                break;
+            case "Digit5":
+                this.drop_item(4);
+                break;
+        }
+    }
+
+    drop_item(slot: number){
+        if(this.inventory[slot] != null){
+            const my_item = this.inventory[slot];
+            my_item.object.position.x = this.camera.position.x;
+            my_item.object.position.z = this.camera.position.z;
+            my_item.object.position.y = 0;
+            this.inv_slot_els[slot].innerText = "Empty Slot";
+            this.inventory[slot] = null;
         }
     }
 
@@ -101,7 +151,7 @@ export class GameState {
 
             if(this.seen_object != object){
                 this.seen_object = object;
-                this.object_popup.style.display = "";
+                this.object_popup_el.style.display = "";
 
                 console.log(object.name);
 
@@ -112,7 +162,7 @@ export class GameState {
         } else {
             if(this.seen_object != null){
                 this.seen_object = null;
-                this.object_popup.style.display = "none";
+                this.object_popup_el.style.display = "none";
             }
         }
         console.log(this.seen_object);
