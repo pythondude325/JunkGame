@@ -5,6 +5,7 @@ import desk_glb from "../assets/desk.glb";
 import { IUpdater } from "./update";
 import { Controls } from "./controls";
 import { Maze } from "./maze";
+import { GameState } from "./state";
 
 class GameRender implements IUpdater {
     scene: THREE.Scene;
@@ -62,12 +63,13 @@ class Game {
 
     controls: Controls;
 
-    object_models: Record<string, THREE.Object3D>;
+    game_state: GameState;
 
     constructor() {
         this.renderer = new GameRender();
         this.gltf_loader = new GLTFLoader();
         this.controls = new Controls(this.renderer.camera, document.body);
+        this.game_state = new GameState(this.load_gltf.bind(this), this.renderer.scene);
     }
 
     render_loop(timestamp: number): void {
@@ -85,11 +87,8 @@ class Game {
         const data = await this.load_gltf(desk_glb);
         this.renderer.scene.add(data.scene);
 
-        this.object_models = {};
-        for (var child of data.scene.children) {
-            console.log({ child });
-            this.object_models[child.name] = child;
-        }
+        await this.game_state.load_models();
+        await this.game_state.spawn_junk(1000);
     }
 }
 
