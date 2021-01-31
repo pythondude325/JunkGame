@@ -190,6 +190,6 @@ body {
     min-width: 100%;
     position: relative;
     text-align: center;
-    
+    z-index: 50;
     display: none;
 }
