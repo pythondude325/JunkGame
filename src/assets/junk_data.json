@@ -1,0 +1,114 @@
+{
+    "junk_data": [
+        {
+            "model_name": "blender",
+            "name": "Broken Blender",
+            "desc": "An old, weathered blender made of plastics and trace metals. Electronic guts spew through its broken base."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Rusted Washing Machine",
+            "desc": "A thrown out washing machine. There’s plenty of crude metal to salvage, if you can carry it."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Busted Flashlight",
+            "desc": "A heavy-duty flashlight, the bulb hanging on by a scrap. Not particularly worth much."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Laptop",
+            "desc": "A long forgotten laptop, subjected to the elements. As valuable as they are rare."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Copper Wiring",
+            "desc": "Discarded, copper wiring. They appear to have been cut and shredded before being discarded."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Metal Pipe",
+            "desc": "A thick, metal pipe. Quite heavy, but a good piece of scrap."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Broken Fan",
+            "desc": "A discarded fan, surprisingly intact. Some of its internals could prove valuable."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "TV",
+            "desc": "The broken shell of a tv. Heavy and cumbersome, but could hold valuable scrap."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Sink",
+            "desc": "A thrown out sink. It’s made of cracked ceramic."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Toilet",
+            "desc": "A broken toilet. Is heavy, but contains plenty of ceramic."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Car Engine",
+            "desc": "A discarded car engine. Is staggeringly heavy, but holds the motherload of metal."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Cell Phone",
+            "desc": "A broken cell phone. Trace amounts of rare metals are within."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Car Battery",
+            "desc": "The discarded battery of a car. Could prove valuable."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Spark Plug",
+            "desc": "An old spark plug. Broken, but could be fixed."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Coil Spring",
+            "desc": "A portion of a car’s suspension. Still in good shape."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Radiator",
+            "desc": "A thrown out car radiator. A bit heavy, but still valuable."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Car Mirror",
+            "desc": "A cracked car mirror. Could still work."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Car wheel",
+            "desc": "A wheel frame for a car. It could be repurposed."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Alternator",
+            "desc": "A discarded alternator from a car. It still works, somehow."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Blue Toothbrush",
+            "desc": "It appears to have been used by multiple rats."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "Klein Bottle",
+            "desc": "I’m not quite sure how to orient this thing."
+        },
+        {
+            "model_name": "zxcv",
+            "name": "last item",
+            "desc": "there are no more items!!!"
+        }
+    ]
+}
