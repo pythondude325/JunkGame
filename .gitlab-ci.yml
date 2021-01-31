@@ -1,0 +1,24 @@
+image: node:14-alpine3.11
+
+stages:
+- build
+- deploy
+
+build:
+  stage: build
+  script:
+  - npm install
+  - npm run build
+  artifacts:
+    expire_in: 30 days
+    paths:
+      - dist
+
+pages:
+  stage: deploy
+  needs: ["build"]
+  script:
+  - cp -r dist public
+  artifacts:
+    paths:
+    - public
