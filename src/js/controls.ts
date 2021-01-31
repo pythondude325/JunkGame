@@ -10,6 +10,7 @@ export class Controls implements IUpdater {
     move_backward: boolean = false;
     move_left: boolean = false;
     move_right: boolean = false;
+    
     move_speed: number = 2; // in meters per second
 
     last_updated: number;

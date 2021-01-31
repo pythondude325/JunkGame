@@ -10,11 +10,11 @@ class GameRender implements IUpdater {
     camera: THREE.PerspectiveCamera;
     canvas: HTMLCanvasElement;
     renderer: THREE.WebGLRenderer;
-    
+
     ambientLight: THREE.AmbientLight;
     directionalLight: THREE.HemisphereLight;
 
-    constructor(){
+    constructor() {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0xaaeeff);
 
@@ -23,7 +23,7 @@ class GameRender implements IUpdater {
         this.camera.position.x = 1;
         this.camera.position.y = 1.6;
 
-        this.canvas = <HTMLCanvasElement> document.getElementById("renderCanvas");
+        this.canvas = <HTMLCanvasElement>document.getElementById("renderCanvas");
 
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
@@ -58,12 +58,12 @@ class Game {
     renderer: GameRender;
     gltf_loader: GLTFLoader;
     blocker: HTMLElement;
-    
+
     controls: Controls;
 
     object_models: Record<string, THREE.Object3D>;
 
-    constructor(){
+    constructor() {
         this.renderer = new GameRender();
         this.gltf_loader = new GLTFLoader();
         this.controls = new Controls(this.renderer.camera, document.body);
@@ -85,8 +85,8 @@ class Game {
         this.renderer.scene.add(data.scene);
 
         this.object_models = {};
-        for(var child of data.scene.children){
-            console.log({child});
+        for (var child of data.scene.children) {
+            console.log({ child });
             this.object_models[child.name] = child;
         }
     }
@@ -95,6 +95,6 @@ class Game {
 document.addEventListener("DOMContentLoaded", async () => {
     const game = new Game();
     await game.load_data();
-    Object.assign(window, {game});
+    Object.assign(window, { game });
     window.requestAnimationFrame(game.render_loop.bind(game));
 });
