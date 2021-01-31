@@ -44,7 +44,7 @@ class GameRender implements IUpdater {
         this.ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(this.ambientLight);
 
-        this.directionalLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 5);
+        this.directionalLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 3);
         // this.directionalLight.position.z = 0.2;
         // this.directionalLight.position.x = 0.2;
         this.scene.add(this.directionalLight);
