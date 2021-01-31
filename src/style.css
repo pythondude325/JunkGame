@@ -54,13 +54,18 @@ body {
     height: auto;
 }
 
-#blocker #audioplayer {
+#blocker .audioplayer {
     position: absolute;
     top: 0;
     opacity: .05;
 }
-#blocker #audioplayer:hover {
+#blocker .audioplayer:hover {
     opacity: 1;
+}
+#gameUI .audioplayer {
+    position: absolute;
+    top: 0;
+    display: none;
 }
 
 #gameUI {
