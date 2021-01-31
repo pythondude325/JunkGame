@@ -54,6 +54,11 @@ body {
     height: auto;
 }
 
+#blocker #audioplayer {
+    position: absolute;
+    top: 0;
+}
+
 #gameUI {
     position: absolute;
     top: 0;
