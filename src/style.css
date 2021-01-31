@@ -71,7 +71,7 @@ body {
     position: absolute;
     top: 40%;
     left: 0%;
-    right: 40%;
+    right: 50%;
     max-width: 600px;
     margin: 0rem auto;
     background: rgba(0, 0, 0, .8);
@@ -83,6 +83,30 @@ body {
     transition-duration: .5s;
     /*Start invisible until hover*/
     /*display: none;*/
+}
+
+#gameUI #crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.5);
+    height: 4px;
+    width: 16px;
+}
+
+#gameUI #crosshair:after {
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    transform: translate(6px, -6px);
+    background: rgba(0, 0, 0, 0.5);
+    height: 16px;
+    width: 4px;
 }
 
 #gameUI #ordertext {
