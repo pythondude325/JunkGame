@@ -4,6 +4,7 @@ import { IUpdater } from "./update";
 
 export class Controls implements IUpdater {
     blocker: HTMLElement;
+    gui: HTMLElement;
     pointer_controls: PointerLockControls;
 
     move_forward: boolean = false;
@@ -21,6 +22,7 @@ export class Controls implements IUpdater {
         this.camera = camera;
 
         this.blocker = document.getElementById("blocker");
+        this.gui = document.getElementById("gameUI");
         this.pointer_controls = new PointerLockControls(this.camera, domElement);
         
         this.blocker.addEventListener("click", () => {
@@ -29,10 +31,12 @@ export class Controls implements IUpdater {
         
         this.pointer_controls.addEventListener('lock', () => {
             this.blocker.style.display = "none";
+            this.gui.style.display = "block";
         });
 
         this.pointer_controls.addEventListener("unlock", () => {
             this.blocker.style.display = "";
+            this.gui.style.display = "none";
         });
 
         domElement.addEventListener("keyup", this.onKeyUpListener.bind(this));
